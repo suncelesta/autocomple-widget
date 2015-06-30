@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="widget">
+    <inherits name="com.google.gwt.user.User"/>
+    <inherits name="com.google.gwt.junit.JUnit"/>
+
+    <source path=""/>
+
+    <add-linker name="xsiframe"/>
+
+    <entry-point class="com.autocomple.App"/>
+
+    <set-property name="user.agent" value="ie8,ie9,ie10,gecko1_8,safari"/>
+
+    <set-configuration-property name="compiler.enum.obfuscate.names" value="true" />
+
+    <!--<set-configuration-property name="compiler.enum.obfuscate.names" value="false"/>-->
+    <set-property name="compiler.stackMode" value="strip"/>
+    <!--<set-configuration-property name="CssResource.style" value="stable-notype" />-->
+
+    <replace-with class="com.autocomple.presenter.NotIE789InputUiHandlersBinder">
+        <when-type-is class="com.autocomple.presenter.InputUiHandlersBinder"/>
+    </replace-with>
+
+    <replace-with class="com.autocomple.presenter.IE789InputUiHandlersBinder">
+        <when-type-is class="com.autocomple.presenter.InputUiHandlersBinder"/>
+        <any>
+            <when-property-is name="user.agent" value="ie7"/>
+            <when-property-is name="user.agent" value="ie8"/>
+            <when-property-is name="user.agent" value="ie9"/>
+        </any>
+    </replace-with>
+
+</module>

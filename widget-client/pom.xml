@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.autocomple</groupId>
+        <artifactId>widget</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>widget-client</artifactId>
+    <packaging>war</packaging>
+
+    <prerequisites>
+        <maven>${mavenVersion}</maven>
+    </prerequisites>
+
+    <properties>
+        <gwt.genParam>false</gwt.genParam>
+        <runTarget>http://0.0.0.0:8080/</runTarget>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>widget-shared</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>widget-shared</artifactId>
+            <version>${project.version}</version>
+            <classifier>sources</classifier>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>gwt-maven-plugin</artifactId>
+                <configuration>
+                    <module>com.autocomple.App</module>
+                    <strict>true</strict>
+                    <genParam>${gwt.genParam}</genParam>
+                    <noserver>true</noserver>
+                    <runTarget>${runTarget}</runTarget>
+                    <!--Closure doesn't work with compiler report simultaneously-->
+                    <jsInteropMode>JS</jsInteropMode>
+                    <closureCompiler>true</closureCompiler>
+                    <compileReport>false</compileReport>
+                    <soycDetailed>false</soycDetailed>
+                    <compilerMetrics>false</compilerMetrics>
+                    <disableCastChecking>true</disableCastChecking>
+                    <disableClassMetadata>true</disableClassMetadata>
+                    <optimizationLevel>9</optimizationLevel>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <packagingExcludes>WEB-INF/**</packagingExcludes>
+                </configuration>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat6-maven-plugin</artifactId>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat7-maven-plugin</artifactId>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <property>
+                    <name>dev</name>
+                </property>
+            </activation>
+            <build>
+                <!-- FIXME: workaround for MGWT-332 -->
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>add-shared-sources-to-classpath</id>
+                                <!-- After 'compile' so they're not compiled to ${project.build.outputDirectory} -->
+                                <!-- But before 'process-classes' to make them available to 'gwt:run' -->
+                                <!-- Use add-source because gwt-maven-plugin adds sources to the classpath, not resources. -->
+                                <phase>process-classes</phase>
+                                <goals>
+                                    <goal>add-source</goal>
+                                </goals>
+                                <configuration>
+                                    <sources>
+                                        <!-- Only sources, resources come from target/classes (to support filtering) -->
+                                        <source>${basedir}/../sample-shared/src/main/java</source>
+                                        <source>${basedir}/../sample-shared/target/classes</source>
+                                    </sources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>gwt-maven-plugin</artifactId>
+                <version>2.6.1</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>compile-report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
+</project>

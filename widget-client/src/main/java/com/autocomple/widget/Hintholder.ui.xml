@@ -1,0 +1,10 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'>
+    <ui:with field="css" type="com.autocomple.resources.AutocompleBundle.Style"/>
+
+    <input ui:field="input"
+           class="{css.autocompleHintholder}"
+           readonly="true"
+           autocomplete="off"
+           spellcheck="false"
+           tabindex="-1"/>
+</ui:UiBinder>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.autocomple</groupId>
+        <artifactId>widget</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>widget-server</artifactId>
+    <packaging>war</packaging>
+
+    <prerequisites>
+        <maven>${mavenVersion}</maven>
+    </prerequisites>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>widget-shared</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>widget-client</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <property>
+                    <name>dev</name>
+                </property>
+            </activation>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.eclipse.jetty</groupId>
+                            <artifactId>jetty-maven-plugin</artifactId>
+                            <configuration>
+                                <scanIntervalSeconds>1</scanIntervalSeconds>
+                                <webApp>
+                                    <baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
+                                        <resourcesAsCSV>
+                                            src/main/webapp,${basedir}/../widget-client/target/widget-client-${project.version}/
+                                        </resourcesAsCSV>
+                                    </baseResource>
+                                    <extraClasspath>${basedir}/../widget-shared/target/classes/</extraClasspath>
+                                </webApp>
+                                <systemProperties>
+                                    <systemProperty>
+                                        <name>gwt.codeserver.port</name>
+                                        <value>9876</value>
+                                    </systemProperty>
+                                </systemProperties>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.tomcat.maven</groupId>
+                            <artifactId>tomcat6-maven-plugin</artifactId>
+                            <configuration>
+                                <addWarDependenciesInClassloader>false</addWarDependenciesInClassloader>
+                                <contextFile>${basedir}/src/main/tomcatconf/context.xml</contextFile>
+                                <path>/</path>
+                                <uriEncoding>UTF-8</uriEncoding>
+                                <systemProperties>
+                                    <gwt.codeserver.port>9876</gwt.codeserver.port>
+                                </systemProperties>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.tomcat.maven</groupId>
+                            <artifactId>tomcat7-maven-plugin</artifactId>
+                            <configuration>
+                                <addWarDependenciesInClassloader>false</addWarDependenciesInClassloader>
+                                <contextFile>${basedir}/src/main/tomcatconf/context.xml</contextFile>
+                                <path>/</path>
+                                <uriEncoding>UTF-8</uriEncoding>
+                                <systemProperties>
+                                    <gwt.codeserver.port>9876</gwt.codeserver.port>
+                                </systemProperties>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+    </profiles>
+</project>

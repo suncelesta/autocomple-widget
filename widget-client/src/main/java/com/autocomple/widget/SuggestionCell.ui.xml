@@ -1,0 +1,8 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'>
+    <ui:with field="suggestionTemplate" type="com.google.gwt.safehtml.shared.SafeHtml"/>
+    <ui:with field="css" type="com.autocomple.resources.AutocompleBundle.Style"/>
+
+    <div ui:field='suggestionDiv' class="{css.suggestion}">
+        <ui:safehtml from="{suggestionTemplate}"/>
+    </div>
+</ui:UiBinder>

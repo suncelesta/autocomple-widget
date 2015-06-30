@@ -1,0 +1,11 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:a="urn:import:com.autocomple.widget"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui">
+    <ui:with field="css" type='com.autocomple.resources.AutocompleBundle.Style'/>
+
+    <g:HTMLPanel tag="span" ui:field="slot" addStyleNames="{css.autocompleSlot}">
+        <a:Hintholder ui:field="hintholder"/>
+        <a:Dropdown ui:field="dropdown"/>
+    </g:HTMLPanel>
+
+</ui:UiBinder>

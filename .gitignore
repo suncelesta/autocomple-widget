@@ -1,0 +1,7 @@
+.history
+.idea
+.cache
+target
+*.iml
+*.orig
+.DS_Store

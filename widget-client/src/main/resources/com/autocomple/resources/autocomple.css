@@ -1,0 +1,219 @@
+span.autocomple-slot {
+    width: 100%;
+    position: relative;
+    display: inline-block;
+    z-index: auto;
+}
+
+input[type="text"].autocomple-input {
+    width: 100%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    border: 2px solid #CBD2D6;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    color: #9CB0B8;
+
+    transition: all .2s ease-in-out;
+    outline: none;
+    background: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+    font-family: arial, sans-serif;
+
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428;
+}
+
+input[type="text"].autocomple-input {
+    position: relative;
+}
+
+input[type="text"].autocomple-input:focus {
+    text-shadow: none;
+    box-shadow: none;
+    color: #363C49;
+    border-color: #ADA8B9;
+}
+
+input[type="text"].autocomple-input-dark {
+    color: #657B83;
+    border-color: #073642;
+}
+
+input[type="text"].autocomple-input-dark:focus {
+    color: #93A1A1;
+    border-color: #586E75;
+}
+
+input[type="text"].autocomple-input-creme {
+    color: #93A1A1;
+    border-color: #eae3cd;
+}
+
+input[type="text"].autocomple-input-creme:focus {
+    color: #657B83;
+    border-color: #d8ca9f;
+}
+
+input[type="text"].autocomple-input-sm {
+    height: 30px;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+input[type="text"].autocomple-input-lg {
+    height: 46px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+}
+
+/* Hintholder */
+
+.autocomple-hintholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-color: transparent;
+    box-shadow: none;
+    background: white;
+
+    width: 100%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    color: #9CB0B8;
+
+    transition: all .2s ease-in-out;
+    outline: none;
+    box-shadow: none;
+    -moz-box-shadow: none;
+
+    font-family: arial, sans-serif;
+
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428;
+}
+
+.autocomple-hintholder-dark {
+    background-color: #002B36;
+    color: #657B83
+}
+
+.autocomple-hintholder-creme {
+    background-color: #FDF6E3;
+    color: #93A1A1
+}
+
+.autocomple-hintholder-sm {
+    height: 30px;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.autocomple-hintholder-lg {
+    height: 46px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+}
+
+/* Dropdown */
+
+span.autocomple-dropdown {
+    z-index: 2147483646;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: block;
+    right: auto;
+    width: 100%;
+    margin-top: -2px;
+
+    border: 2px solid #ADA8B9;
+    border-radius: 3px;
+    color: #363C49;
+    background-color: #ffffff;
+
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+
+    -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+span.autocomple-dropdown .suggestion {
+    padding: 4px 12px;
+}
+
+span.autocomple-dropdown-dark {
+    color: #93A1A1;
+    border-color: #586E75;
+    background-color: #002B36;
+}
+
+span.autocomple-dropdown-creme {
+    color: #657B83;
+    border-color: #d8ca9f;
+    background-color: #FDF6E3;
+}
+
+span.autocomple-dropdown-sm .suggestion {
+    padding: 4px 10px;
+    font-size: 12px;
+}
+
+span.autocomple-dropdown-lg .suggestion {
+    padding: 4px 16px;
+    font-size: 18px;
+}
+
+.cellListWidget {
+}
+
+.cellListEvenItem {
+}
+
+.cellListOddItem {
+}
+
+.cellListKeyboardSelectedItem,
+.cellListSelectedItem {
+    background-color: #EEEEF1;
+}
+
+span.autocomple-dropdown-dark .cellListKeyboardSelectedItem,
+span.autocomple-dropdown-dark .cellListSelectedItem {
+    background-color: #073642;
+}
+
+span.autocomple-dropdown-creme .cellListKeyboardSelectedItem,
+span.autocomple-dropdown-creme .cellListSelectedItem {
+    background-color: #EEE8D5;
+}
+
+/* Suggestion */
+
+.suggestion {
+    cursor: pointer;
+    padding: 4px 9px;
+
+    font-size: 14px;
+    line-height: 1;
+
+    font-family: arial, sans-serif;
+}

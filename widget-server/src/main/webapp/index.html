@@ -1,0 +1,71 @@
+<!doctype html>
+
+<html>
+<head>
+    <meta charset=UTF-8>
+    <title>Autocomple widget</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            position: relative;
+            margin: 200px auto 0 auto;
+            width: 600px;
+        }
+    </style>
+</head>
+
+<body>
+<table class="container">
+    <tr>
+        <td><input type="text" id="first" placeholder="Search" style="display: none;"/></td>
+        <td><input type="text"
+                   data-autocomple
+                   data-autocomple-size="l"
+                   data-autocomple-theme="creme"
+                   data-autocomple-suggestions-limit="11"
+                   data-autocomple-hint-enabled="true"
+                   data-autocomple-remote-is-jsonp="true"
+                   data-autocomple-remote-url="http://api.autocomple.com/dictionaries/00000000-0000-0000-0000-000000000000/suggestions?ngr=%QUERY"
+                   data-autocomple-remote-wildcard="%QUERY"
+                   placeholder="Full name"
+                   style="display: none;"/></td>
+    </tr>
+</table>
+<script type="text/javascript">
+    var autocomple = [
+        {
+            elementId: 'first',
+            size: 'm',
+            suggestionsLimit: 6,
+            source: {
+                remote: {
+                    url: 'http://api.autocomple.com/dictionaries/00000000-0000-0000-0000-000000000000/suggestions?ngr=%QUERY',
+                    wildcard: '%QUERY',
+                    isJsonp: true,
+                    headers: {
+                        'Authorization': 'Basic xxxxxxxxxxxxx',
+                        'X_CSRF_TOKEN': 'xxxxxxxxxxxxxxxxxxxx',
+                        'Content-Type': 'application/json'
+                    }
+                }
+            }
+        }
+    ];
+
+    (function () {
+        var widget = document.createElement('script');
+        widget.type = 'text/javascript';
+        widget.async = true;
+        widget.src = "http://localhost:9876/widget/widget.nocache.js";
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(widget);
+    })();
+
+</script>
+
+</body>
+</html>
